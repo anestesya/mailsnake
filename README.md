@@ -1,20 +1,24 @@
-MailSnake 
-=========
-Python wrapper for MailChimp API 1.3
+MailSnake-GAE
+=============
+Python wrapper for MailChimp API 3.0 for Google App Engine.
 
 Usage
 =====
     >>> from mailsnake import MailSnake 
     >>> ms = MailSnake('YOUR MAILCHIMP API KEY')
-    >>> ms.ping()
+    >>> ms.resource(**params)
     u "Everything's Chimpy!"
 
 Note
 ====
 API parameters must be passed by name. For example:
 
-    >>> ms.listMemberInfo(id='YOUR LIST ID', email_address='name@email.com')
+    >>> ms.lists(id='YOUR LIST ID', resource=['members'], post_data=post_data, method_type=urlfetch.POST)
 
-MailChimp API v1.3 documentation
+MailChimp API v3.0 documentation
 ================================
-http://www.mailchimp.com/api/1.3/
+http://kb.mailchimp.com/api/?utm_source=apidocs&utm_medium=internal_ad&utm_campaign=api_v3
+
+
+Created by: John-Kim Murphy (https://github.com/leftium)
+Converted to 3.0 on App Engine by: Tadeu Luis Pires Gaudio @anestesya
