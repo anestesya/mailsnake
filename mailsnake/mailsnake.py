@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# coding=utf-8
+__author__ = 'tadgaudio@gmail.com (Tadeu luis Pires Gaudio)'
+
 from google.appengine.api import urlfetch
 import logging
 import json
@@ -5,6 +9,18 @@ import json
 mailchimp_api_url = 'https://us8.api.mailchimp.com/3.0/'
 mailchimp_api_key = 'f85e562bed97acd14553615c3d9215a7-us8'
 list_id = ''
+
+def mailchimp_subscribe(list_id=None, post_data={}):
+    """
+    Subscribes this email to your mailchimp newsletter. If list_id is not
+    set it will default to settings.MAILCHIMP_LIST_ID.
+    """
+    #config = webapp2.get_app().config.get('mailchimp_api_key')
+    ms = MailSnake(mailchimp_api_key)
+    list_id = list_id or list_id
+    res = ms.lists(id=list_id, resource=['members'], post_data=post_data, method_type=urlfetch.POST)
+    logging.info("MailChimp: Subscribed. Result: %s" % res)
+    return res
 
 class MailSnake(object):
     """
